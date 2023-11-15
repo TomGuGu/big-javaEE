@@ -5,15 +5,17 @@ import java.util.List;
 import java.util.Map;
 
 public interface BaseDao<T> {
-    T get(Serializable id);
 
-    List<T> find(Map map);
+  T get(Serializable id);
 
-    void insert(T entity);
+  List<T> find(Map<String, Object> map);
 
-    void update(T entity);
+  void insert(T entity);
 
-    void deleteById(Serializable id);
+  void update(T entity);
 
-    void delete(Serializable[] ids);
+  void deleteById(Serializable id);
+
+  void delete(Serializable[] ids);
+
 }
