@@ -9,7 +9,6 @@ public class LoginInterceptor implements HandlerInterceptor {
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
-    System.out.println("LoginInterceptor.preHandle()");
     String uri = request.getRequestURI();
     // 判断是否是登录/注册请求
     if (!(uri.contains("login") || uri.contains("Login") || uri.contains("register"))) {

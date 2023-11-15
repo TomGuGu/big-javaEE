@@ -49,9 +49,6 @@ public class UserController extends BaseController {
     Map<String, Object> map = new HashMap<>();
     map.put("username", user.getUsername());
     List<User> userList = userService.find(map);
-    System.out.println(user);
-    System.out.println(map);
-    System.out.println(userList);
     if (userList != null && !userList.isEmpty()) {
       model.addAttribute("errorMsg", "注册失败，用户名已被占用！");
       return "/register.jsp";

@@ -162,7 +162,8 @@
           return;
         }
         $("#dRetailerId").val(id);
-        $("#dCurrentPage").val($("#startPage").val());
+        $("#dStartPage").val($("#startPage").val());
+        $("#dCurrentPage").val($("#currentPage").val());
         $("#dPageSize").val($("#pageSize").val());
         $("#deleteForm").submit();
       }
