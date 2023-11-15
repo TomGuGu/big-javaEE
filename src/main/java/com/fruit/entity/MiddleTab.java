@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class MiddleTab {
 
-  private String middleTabId;
+  private String middleId;
 
   private String fruitId;
 
