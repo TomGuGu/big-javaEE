@@ -1,4 +1,4 @@
-create table user
+create table big_java_ee.user
 (
     userid    varchar(255) not null
         primary key,
@@ -7,3 +7,4 @@ create table user
     name      varchar(255) null,
     telephone varchar(255) null
 );
+
