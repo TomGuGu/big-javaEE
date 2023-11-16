@@ -26,14 +26,16 @@ public class RetailerController extends BaseController {
   @RequestMapping("/retailer/list.action")
   public String list(Model model, Retailer retailer, String startTime, String endTime) {
     Map<String, Object> map = this.reatailerToMap(retailer);
-    if (startTime != null && startTime.isEmpty()) {
+    if (startTime != null && !startTime.isEmpty()) {
       map.put("startTime", startTime);
     }
-    if (endTime != null && endTime.isEmpty()) {
+    if (endTime != null && !endTime.isEmpty()) {
       map.put("endTime", endTime);
     }
-    model.addAttribute("retailer", retailer);
     List<Retailer> retailerList = retailerService.find(map);
+    model.addAttribute("retailer", retailer);
+    model.addAttribute("startTime", startTime);
+    model.addAttribute("endTime", endTime);
     model.addAttribute("list", retailerList.isEmpty() ? null : retailerList);
     model.addAttribute("currentPage", retailer.getCurrentPage());
     model.addAttribute("startPage", retailer.getStartPage());

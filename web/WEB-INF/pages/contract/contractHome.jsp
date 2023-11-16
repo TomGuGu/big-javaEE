@@ -145,24 +145,14 @@
             + id;
         window.open(url, "合同详情", "height=700,width=700,scrollbars=yes")
       }
-
-      function printpage() {
-        document.getElementById("p").style.display = "none";
-        window.print();
-        document.getElementById("p").style.display = "inline-block";
-      }
     </script>
 </head>
 <body onload="init()">
 <%@ include file="../menu.jsp" %>
 <br/>
 
-<button onclick="addContract()" style="background-color: #173e65;color: #ffffff;width: 70px">
+<button onclick="addContract()" style="background-color: #c3e28a;color: #ffffff;width: 70px">
     添加
-</button>
-
-<button id="p" onclick="printpage()" style="background-color: #173e65;color: #ffffff;width: 70px">
-    打印
 </button>
 
 <form id="listForm" action="list.action" method="post">
@@ -181,7 +171,7 @@
     <input type="datetime-local" name="startTime" value="${startTime}">
     -
     <input type="datetime-local" name="endTime" value="${endTime}">
-    <input type="submit" value="搜索" style="background-color: #173e65;color: #ffffff;width: 70px"/><br/>
+    <input type="submit" value="搜索" style="background-color: #c3e28a;color: #ffffff;width: 70px"/><br/>
     <c:if test="${errorMsg}">
         <font color="red">${errorMsg}</font><br/>
     </c:if>

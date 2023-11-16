@@ -3,6 +3,13 @@
 <html>
 <head>
     <title>合同详情</title>
+    <script>
+        function printpage() {
+            document.getElementById("p").style.display = "none";
+            window.print();
+            document.getElementById("p").style.display = "inline-block";
+        }
+    </script>
 </head>
 <body>
 <h2 style="text-align: center">销购合同</h2>
@@ -51,4 +58,9 @@
         </table>
     </c:if>
 </div>
+
+<button id="p" onclick="printpage()" style="background-color: #c3e28a;color: #ffffff;width: 70px">
+    打印
+</button>
+
 </html>
