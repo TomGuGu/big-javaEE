@@ -270,7 +270,7 @@
     <input type="datetime-local" name="startTime" value="${startTime}">
     -
     <input type="datetime-local" name="endTime" value="${endTime}">
-    <input type="submit" value="搜索" style="background-color: #c3e28a;color: #ffffff;width: 70px"/><br/>
+    <input type="submit" value="搜索" style="background-color: #173e65;color: #ffffff;width: 70px"/><br/>
     <c:if test="${errorMsg}">
         <font color="red">${errorMsg}</font><br/>
     </c:if>
