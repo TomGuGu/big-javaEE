@@ -60,7 +60,7 @@
 </div>
 
 <br>
-<button id="p" onclick="printpage()" style="background-color: #c3e28a;color: #ffffff;width: 70px">
+<button id="p" onclick="printpage()" style="background-color: #173e65;color: #ffffff;width: 70px">
     打印
 </button>
 
