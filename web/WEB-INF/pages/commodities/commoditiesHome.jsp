@@ -181,7 +181,6 @@
 </head>
 <body onload="init()">
 <%@ include file="../menu.jsp" %>
-<br/>
 
 <div class="mask">
     <div class="c">

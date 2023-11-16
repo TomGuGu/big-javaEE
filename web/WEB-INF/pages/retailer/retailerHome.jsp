@@ -267,8 +267,11 @@
         <option value="0">停用</option>
     </select>
     <input type="hidden" id="status" name="status" value="-1">
-    创建日期:<input type="text" name="createTime" value="${retailer.createTime}">
-    <input type="submit" value="搜索" style="background-color: #173e65;color: #ffffff;width: 70px"/><br/>
+    创建日期:
+    <input type="datetime-local" name="startTime" value="${startTime}">
+    -
+    <input type="datetime-local" name="endTime" value="${endTime}">
+    <input type="submit" value="搜索" style="background-color: #c3e28a;color: #ffffff;width: 70px"/><br/>
     <c:if test="${errorMsg}">
         <font color="red">${errorMsg}</font><br/>
     </c:if>
