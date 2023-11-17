@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>货物信息管理</title>
@@ -18,7 +18,6 @@
         border-style: solid;
         width: 200px;
         height: 130px;
-        margin: 4px 23px 0px 23px;
         border-radius: 5px;
         display: block;
         background: #ffffff;
@@ -43,14 +42,10 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script type="text/javascript">
-      function changeStatus() {
-        document.getElementById("status").value = document.getElementById("indexStatus").value;
-      }
-
       function init() {
-        var countNumber = document.getElementById("countNumber").value;
-        var sumPage = document.getElementById("sumPageNumber").value;
-        var currentPage = document.getElementById("currentPage").value;
+        const countNumber = document.getElementById("countNumber").value;
+        const sumPage = document.getElementById("sumPageNumber").value;
+        const currentPage = document.getElementById("currentPage").value;
         document.getElementById("pageInfo").innerHTML = "一共<font color='bule'>" + countNumber
             + "</font>条数据，" +
             "共<font color='blue'>" + sumPage + "</font>页," +
@@ -58,51 +53,51 @@
       }
 
       function toPrePage() {
-        var currentPageObject = document.getElementById("currentPage");
-        var currentPage = parseInt(currentPageObject.value);
+        const currentPageObject = document.getElementById("currentPage");
+        const currentPage = parseInt(currentPageObject.value);
         if (currentPage === 1) {
           alert("数据已到顶！");
         } else {
           currentPageObject.value = currentPage - 1;
-          var pageSize = parseInt(document.getElementById("pageSize").value);
-          var startPageObject = document.getElementById("startPage");
+          const pageSize = parseInt(document.getElementById("pageSize").value);
+          const startPageObject = document.getElementById("startPage");
           startPageObject.value = parseInt(startPageObject.value) - pageSize;
           document.getElementById("listForm").submit();
         }
       }
 
       function toNextPage() {
-        var currentPageObject = document.getElementById("currentPage");
-        var currentPage = parseInt(currentPageObject.value);
-        var sumPage = parseInt(document.getElementById("sumPageNumber").value);
+        const currentPageObject = document.getElementById("currentPage");
+        const currentPage = parseInt(currentPageObject.value);
+        const sumPage = parseInt(document.getElementById("sumPageNumber").value);
         if (currentPage >= sumPage) {
           alert("数据已到底！");
         } else {
           currentPageObject.value = currentPage + 1;
-          var pageSize = parseInt(document.getElementById("pageSize").value);
-          var startPageObject = document.getElementById("startPage");
+          const pageSize = parseInt(document.getElementById("pageSize").value);
+          const startPageObject = document.getElementById("startPage");
           startPageObject.value = parseInt(startPageObject.value) + pageSize;
           document.getElementById("listForm").submit();
         }
       }
 
       function toLocationPage() {
-        var pageNumber = document.getElementById("pageNumber").value;
-        var currentPageObject = document.getElementById("currentPage");
-        var currentPage = currentPageObject.value;
+        let pageNumber = document.getElementById("pageNumber").value;
+        const currentPageObject = document.getElementById("currentPage");
+        const currentPage = currentPageObject.value;
         if (pageNumber == null || pageNumber === "") {
           alert("请输入要跳转的页数！")
         } else {
           pageNumber = parseInt(pageNumber);
-          var sumPage = parseInt(document.getElementById("sumPageNumber").value);
+          const sumPage = parseInt(document.getElementById("sumPageNumber").value);
           if (pageNumber < 1) {
             alert("数据已到顶!")
           } else if (pageNumber > sumPage) {
             alert("数据已到底!")
           } else {
             currentPageObject.value = pageNumber;
-            var pageSize = parseInt(document.getElementById("pageSize").value);
-            var startPageObject = document.getElementById("startPage");
+            const pageSize = parseInt(document.getElementById("pageSize").value);
+            const startPageObject = document.getElementById("startPage");
             if (pageNumber > currentPage) {
               startPageObject.value = parseInt(startPageObject.value) + pageSize;
             } else if (pageNumber < currentPage) {
@@ -114,7 +109,7 @@
       }
 
       function editCommodities(id) {
-        var message = "{'id':'" + id + "'}";
+        const message = "{'id':'" + id + "'}";
         $.ajax({
           type: 'post',
           url: '${pageContext.request.contextPath}/commodities/editCommodities.action',
@@ -174,7 +169,7 @@
       }
 
       function openwin(id) {
-        var url = "${pageContext.request.contextPath}/accessory/list.action?fruitId=" + id;
+        const url = "${pageContext.request.contextPath}/accessory/list.action?fruitId=" + id;
         window.open(url, "附属品", "height=400,width=700,scrollbars=yes");
       }
     </script>
@@ -186,7 +181,7 @@
     <div class="c">
         <div style="background-color: #173e65;height: 20px;color: #ffffff;font-size: 12px;padding-left: 7px">
             修改信息
-            <font style="float: right;padding-right: 10px;" onclick="cancelEdit()">x</font>
+            <span style="float: right;padding-right: 10px;" onclick="cancelEdit()">x</span>
         </div>
         <form id="editForm" action="edit.action" method="post">
             名称:<input type="text" id="editName" name="name" style="width: 120px"/><br/>
@@ -206,7 +201,7 @@
     <div class="c">
         <div style="background-color: #173e65;height: 20px;color: #ffffff;font-size: 12px;padding-left: 7px">
             添加信息
-            <font style="float: right;padding-right: 10px;" onclick="showAddMask('false')">x</font>
+            <span style="float: right;padding-right: 10px;" onclick="showAddMask('false')">x</span>
         </div>
         <form id="addForm" action="add.action" method="post" onsubmit="return checkAddCommodities()">
             名称:<input type="text" id="addName" name="name" style="width: 120px"/><br/>
@@ -237,7 +232,7 @@
     <input type="datetime-local" name="endTime" value="${endTime}">
     <input type="submit" value="搜索" style="background-color: #173e65;color: #ffffff;width: 70px"/><br/>
     <c:if test="${errorMsg}">}
-        <font color="red">${errorMsg}</font><br/>
+        <span style="color: red; ">${errorMsg}</span><br/>
     </c:if>
     <input type="hidden" name="startPage" id="startPage" value="${startPage}"/>
     <input type="hidden" name="currentPage" id="currentPage" value="${currentPage}"/>

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <div id="menuContent" style="background-color:#173e65;color:#ffffff;height:100px">
     <h1 style="margin-left: 10px;margin-top: 10px">水果网络销售平台</h1><br/>
     <div style="margin-left: 10px;">

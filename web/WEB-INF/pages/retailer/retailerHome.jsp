@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>零售商管理</title>
@@ -18,7 +18,6 @@
         border-style: solid;
         width: 200px;
         height: 130px;
-        margin: 4px 23px 0px 23px;
         border-radius: 5px;
         display: block;
         background: #ffffff;
@@ -48,17 +47,17 @@
       }
 
       function init() {
-        var countNumber = document.getElementById("countNumber").value;
-        var sumPage = document.getElementById("sumPageNumber").value;
-        var currentPage = document.getElementById("currentPage").value;
+        const countNumber = document.getElementById("countNumber").value;
+        const sumPage = document.getElementById("sumPageNumber").value;
+        const currentPage = document.getElementById("currentPage").value;
         document.getElementById("pageInfo").innerHTML = "一共<font color='bule'>" + countNumber
             + "</font>条数据，" +
             "共<font color='blue'>" + sumPage + "</font>页," +
             "当前第<font color='blue'>" + currentPage + "</font>页";
 
-        var statusAl = document.getElementById("indexStatus").children[0];
-        var statusEn = document.getElementById("indexStatus").children[1];
-        var statusDs = document.getElementById("indexStatus").children[2];
+        const statusAl = document.getElementById("indexStatus").children[0];
+        const statusEn = document.getElementById("indexStatus").children[1];
+        const statusDs = document.getElementById("indexStatus").children[2];
         if ("${retailer.status}" === "1") {
           // 表示查询的是启用状态
           statusEn.selected = true;
@@ -72,51 +71,51 @@
       }
 
       function toPrePage() {
-        var currentPageObject = document.getElementById("currentPage");
-        var currentPage = parseInt(currentPageObject.value);
+        const currentPageObject = document.getElementById("currentPage");
+        const currentPage = parseInt(currentPageObject.value);
         if (currentPage === 1) {
           alert("数据已到顶！");
         } else {
           currentPageObject.value = currentPage - 1;
-          var pageSize = parseInt(document.getElementById("pageSize").value);
-          var startPageObject = document.getElementById("startPage");
+          const pageSize = parseInt(document.getElementById("pageSize").value);
+          const startPageObject = document.getElementById("startPage");
           startPageObject.value = parseInt(startPageObject.value) - pageSize;
           document.getElementById("listForm").submit();
         }
       }
 
       function toNextPage() {
-        var currentPageObject = document.getElementById("currentPage");
-        var currentPage = parseInt(currentPageObject.value);
-        var sumPage = parseInt(document.getElementById("sumPageNumber").value);
+        const currentPageObject = document.getElementById("currentPage");
+        const currentPage = parseInt(currentPageObject.value);
+        const sumPage = parseInt(document.getElementById("sumPageNumber").value);
         if (currentPage >= sumPage) {
           alert("数据已到底！");
         } else {
           currentPageObject.value = currentPage + 1;
-          var pageSize = parseInt(document.getElementById("pageSize").value);
-          var startPageObject = document.getElementById("startPage");
+          const pageSize = parseInt(document.getElementById("pageSize").value);
+          const startPageObject = document.getElementById("startPage");
           startPageObject.value = parseInt(startPageObject.value) + pageSize;
           document.getElementById("listForm").submit();
         }
       }
 
       function toLocationPage() {
-        var pageNumber = document.getElementById("pageNumber").value;
-        var currentPageObject = document.getElementById("currentPage");
-        var currentPage = currentPageObject.value;
+        let pageNumber = document.getElementById("pageNumber").value;
+        const currentPageObject = document.getElementById("currentPage");
+        const currentPage = currentPageObject.value;
         if (pageNumber == null || pageNumber === "") {
           alert("请输入要跳转的页数！")
         } else {
           pageNumber = parseInt(pageNumber);
-          var sumPage = parseInt(document.getElementById("sumPageNumber").value);
+          const sumPage = parseInt(document.getElementById("sumPageNumber").value);
           if (pageNumber < 1) {
             alert("数据已到顶!")
           } else if (pageNumber > sumPage) {
             alert("数据已到底!")
           } else {
             currentPageObject.value = pageNumber;
-            var pageSize = parseInt(document.getElementById("pageSize").value);
-            var startPageObject = document.getElementById("startPage");
+            const pageSize = parseInt(document.getElementById("pageSize").value);
+            const startPageObject = document.getElementById("startPage");
             if (pageNumber > currentPage) {
               startPageObject.value = parseInt(startPageObject.value) + pageSize;
             } else if (pageNumber < currentPage) {
@@ -128,7 +127,7 @@
       }
 
       function editRetailer(id) {
-        var message = "{'id':'" + id + "'}";
+        const message = "{'id':'" + id + "'}";
         $.ajax({
           type: 'post',
           url: '${pageContext.request.contextPath}/retailer/editRetailer.action',
@@ -185,7 +184,7 @@
           alert("手机号不能为空！");
           return false;
         }
-        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8}$)/;
+        const myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8}$)/;
         if (!myreg.test($("#addTelephone").val())) {
           alert("请输入有效的手机号码！");
           return false;
@@ -205,7 +204,7 @@
     <div class="c">
         <div style="background-color: #173e65;height: 20px;color: #ffffff;font-size: 12px;padding-left: 7px">
             修改信息
-            <font style="float: right;padding-right: 10px;" onclick="cancelEdit()">x</font>
+            <span style="float: right;padding-right: 10px;" onclick="cancelEdit()">x</span>
         </div>
         <form id="editForm" action="edit.action" method="post">
             姓名:
@@ -235,7 +234,7 @@
     <div class="c">
         <div style="background-color: #173e65;height: 20px;color: #ffffff;font-size: 12px;padding-left: 7px">
             添加信息
-            <font style="float: right;padding-right: 10px;" onclick="showAddMask('false')">x</font>
+            <span style="float: right;padding-right: 10px;" onclick="showAddMask('false')">x</span>
         </div>
         <form id="addForm" action="add.action" method="post" onsubmit="return checkAddRetailer()">
             姓名:<input type="text" id="addName" name="name" style="width: 120px"/><br/>
@@ -272,7 +271,7 @@
     <input type="datetime-local" name="endTime" value="${endTime}">
     <input type="submit" value="搜索" style="background-color: #173e65;color: #ffffff;width: 70px"/><br/>
     <c:if test="${errorMsg}">
-        <font color="red">${errorMsg}</font><br/>
+        <span style="color: red; ">${errorMsg}</span><br/>
     </c:if>
     <input type="hidden" name="startPage" id="startPage" value="${startPage}"/>
     <input type="hidden" name="currentPage" id="currentPage" value="${currentPage}"/>
@@ -302,10 +301,10 @@
                 <td>${item.address}</td>
                 <td>
                     <c:if test="${item.status==1}">
-                        <font color="blue">启用</font>
+                        <span style="color: blue; ">启用</span>
                     </c:if>
                     <c:if test="${item.status==0}">
-                        <font color="red">停用</font>
+                        <span style="color: red; ">停用</span>
                     </c:if>
                 </td>
                 <td>${item.createTime}</td>

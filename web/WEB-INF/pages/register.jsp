@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>注册</title>
@@ -57,7 +57,7 @@
             <a href="toLogin.action">返回登录</a>
         </form>
         <c:if test="${errorMsg!=null}">
-            <font color="red">${errorMsg}</font>
+            <span style="color: red; ">${errorMsg}</span>
         </c:if>
     </div>
 </div>

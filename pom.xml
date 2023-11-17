@@ -4,34 +4,22 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>pers.volta</groupId>
-  <artifactId>big-javaEE</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
-  <packaging>war</packaging>
-
-  <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
   <dependencies>
     <!--  spring  -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>6.0.11</version>
+      <version>6.0.13</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>6.0.11</version>
+      <version>6.0.13</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>6.0.11</version>
+      <version>6.0.13</version>
     </dependency>
     <dependency>
       <groupId>jakarta.annotation</groupId>
@@ -80,7 +68,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>6.0.11</version>
+      <version>6.0.13</version>
     </dependency>
     <!--  lombok*  -->
     <dependency>
@@ -101,10 +89,19 @@
       <version>2.15.2</version>
     </dependency>
   </dependencies>
+  <artifactId>big-javaEE</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <packaging>war</packaging>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <groupId>com.fruit</groupId>
   <build>
-    <!--  STEP 2: 配置资源映射  -->
-    <!--  配置资源映射，不然会被 Maven 过滤，导致 MyBatis 无法使用  -->
-    <!--  表现为报错 Invalid Bound  -->
     <resources>
       <resource>
         <directory>src/main/java</directory>
@@ -127,15 +124,8 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>3.4.0</version>
         <configuration>
-          <!--
-              如果您的Web应用程序没有web.xml文件，则在打包WAR文件时可能会出现错误
-              通常情况下，建议在生产环境中将failOnMissingWebXml参数设置为true，以确保Web应用程序在部署时能够正常工作。
-              但是，在开发过程中，可能会将其设置为false，以便在没有web.xml文件的情况下进行测试。
-          -->
           <failOnMissingWebXml>false</failOnMissingWebXml>
-          <!--指定web.xml文件的位置-->
           <webXml>web\WEB-INF\web.xml</webXml>
-          <!--指定jsp等文件所在位置-->
           <warSourceDirectory>web</warSourceDirectory>
         </configuration>
       </plugin>

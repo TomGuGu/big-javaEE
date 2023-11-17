@@ -2,7 +2,6 @@ package com.fruit.entity;
 
 import java.util.List;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
 public class CommoditiesVo {

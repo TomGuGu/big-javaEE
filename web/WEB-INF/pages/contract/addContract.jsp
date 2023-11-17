@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>新建销购合同</title>
@@ -74,7 +74,7 @@
 
       function addRetailer(name) {
         $("#retailerList").html("");
-        var message = ""
+        let message;
         if (name !== null) {
           message = "{\"name\":\"" + name + "\"}";
         } else {
@@ -86,16 +86,16 @@
           contentType: 'application/json;charset=utf-8',
           data: message,
           success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-              var oldHtml = $("#retailerList").html();
-              var info = "<p onclick=\"selectRetailer('" + data[i].retailerId + "','"
+            for (let i = 0; i < data.length; i++) {
+              const oldHtml = $("#retailerList").html();
+              const info = "<p onclick=\"selectRetailer('" + data[i].retailerId + "','"
                   + data[i].name + "','" + data[i].telephone + "','" + data[i].address + "')\">"
                   + data[i].name + "</p>";
               $("#retailerList").html(oldHtml + info);
             }
             $(".retailerMask").css("display", "block");
           },
-          error: function (data) {
+          error: function () {
             alert("通信异常!");
           }
         })
@@ -106,7 +106,7 @@
       }
 
       function addFruits(name) {
-        var message = ""
+        let message;
         if (name !== null) {
           message = "{\"name\":\"" + name + "\"}";
         } else {
@@ -118,16 +118,16 @@
           contentType: 'application/json;charset=utf-8',
           data: message,
           success: function (data) {
-            var tableHead = "<tr>" +
+            const tableHead = "<tr>" +
                 "<td><input type='checkbox' onclick='checkAll(this)'></td>" +
                 "<td>名称</td>" +
                 "<td>价格</td>" +
                 "<td>产地</td>" +
                 "</tr>";
             $("#commoditiesList").html(tableHead);
-            for (var i = 0; i < data.length; i++) {
-              var oldHtml = $("#commoditiesList").html();
-              var info = "<tr>" +
+            for (let i = 0; i < data.length; i++) {
+              const oldHtml = $("#commoditiesList").html();
+              const info = "<tr>" +
                   "<td><input type='checkbox' name='arrays' value='" + data[i].fruitId
                   + "'></td>" +
                   "<td>" + data[i].name + "</td>" +
@@ -142,26 +142,26 @@
                 + "</table>")
             $(".commoditiesMask").css("display", "block");
           },
-          error: function (data) {
+          error: function () {
             alert("通信异常!");
           }
         })
       }
 
       function checkAll(obj) {
-        var isCheck = obj.checked;
-        var checkList = document.getElementsByName("arrays");
-        for (var i = 0; i < checkList.length; i++) {
+        const isCheck = obj.checked;
+        const checkList = document.getElementsByName("arrays");
+        for (let i = 0; i < checkList.length; i++) {
           checkList[i].checked = isCheck;
         }
       }
 
       function selectCommodities() {
         $("#commodities_info").html("");
-        var myArray = []
-        var len = 0
-        var arrays = document.getElementsByName("arrays");
-        for (var i = 0; i < arrays.length; i++) {
+        const myArray = [];
+        let len = 0;
+        const arrays = document.getElementsByName("arrays");
+        for (let i = 0; i < arrays.length; i++) {
           if (arrays[i].checked) {
             myArray[len] = arrays[i].value;
             len++;
@@ -173,7 +173,7 @@
           data: {"arrays": myArray},
           traditional: true,
           success: function (data) {
-            var tableHead = "<tr>" +
+            const tableHead = "<tr>" +
                 "<td>名称</td>" +
                 "<td>价格</td>" +
                 "<td>产地</td>" +
@@ -181,19 +181,19 @@
                 "<td>数量</td>" +
                 "</tr>";
             $("#commodities_info").html(tableHead);
-            for (var i = 0; i < data.length; i++) {
-              var commodities = data[i].commodities;
-              var accessory = data[i].accessory;
-              var accessoryStr = "";
-              for (var j = 0; j < accessory.length; j++) {
+            for (let i = 0; i < data.length; i++) {
+              const commodities = data[i].commodities;
+              const accessory = data[i].accessory;
+              let accessoryStr = "";
+              for (let j = 0; j < accessory.length; j++) {
                 accessoryStr += accessory[j].name + ":" + accessory[j].price + "元";
                 if (j !== accessory.length - 1) {
                   accessoryStr += "<br>";
                 }
               }
               accessoryStr = accessory === "" ? "无" : accessoryStr;
-              var oldHtml = $("#commodities_info").html();
-              var info = "<tr>" +
+              const oldHtml = $("#commodities_info").html();
+              const info = "<tr>" +
                   "<td>" + commodities.name + "</td>" +
                   "<td>" + commodities.price + "元/斤</td>" +
                   "<td>" + commodities.locality + "</td>" +
@@ -210,7 +210,7 @@
             $(".commoditiesMask").css("display", "none");
             $("#commodities_info").css("display", "block");
           },
-          error: function (data) {
+          error: function () {
             alert("通信异常!");
           }
         })
@@ -228,7 +228,7 @@
     <div class="c">
         <div style="background-color: #173e65;height: 20px;color: #ffffff;font-size: 12px;padding-left: 7px">
             零售商信息
-            <font style="float: right;padding-right: 10px;" onclick="cancelEdit()">x</font>
+            <span style="float: right;padding-right: 10px;" onclick="cancelEdit()">x</span>
         </div>
         <input type="text" id="retailerName" width="width:20%" style="margin: 0 20px">
         <button class="btn" onclick="searchRetailer()" style="margin: 0 auto">查询</button>
@@ -242,7 +242,7 @@
     <div class="c2">
         <div style="background-color: #173e65;height: 20px;color: #ffffff;font-size: 12px;padding-left: 7px">
             水果列表
-            <font style="float: right;padding-right: 10px;" onclick="cancelEdit()">x</font>
+            <span style="float: right;padding-right: 10px;" onclick="cancelEdit()">x</span>
         </div>
         <input type="text" id="commoditiesName" width="width:20%" style="margin: 0 20px">
         <button class="btn" onclick="searchCommodities()" style="margin: 0 auto">查询</button>
@@ -287,7 +287,7 @@
     <input type="submit" value="提交" class="btn">
 </form>
 <c:if test="${resultMessage!=null}">
-    <br><font color="red">${resultMessage}</font>
+    <br><span style="color: red; ">${resultMessage}</span>
 </c:if>
 </body>
 </html>

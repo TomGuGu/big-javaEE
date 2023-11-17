@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>销购合同管理</title>
@@ -18,7 +18,6 @@
         border-style: solid;
         width: 200px;
         height: 130px;
-        margin: 4px 23px 0px 23px;
         border-radius: 5px;
         display: block;
         background: #ffffff;
@@ -40,17 +39,17 @@
       }
 
       function init() {
-        var countNumber = document.getElementById("countNumber").value;
-        var sumPage = document.getElementById("sumPageNumber").value;
-        var currentPage = document.getElementById("currentPage").value;
+        const countNumber = document.getElementById("countNumber").value;
+        const sumPage = document.getElementById("sumPageNumber").value;
+        const currentPage = document.getElementById("currentPage").value;
         document.getElementById("pageInfo").innerHTML = "一共<font color='bule'>" + countNumber
             + "</font>条数据，" +
             "共<font color='blue'>" + sumPage + "</font>页," +
             "当前第<font color='blue'>" + currentPage + "</font>页";
 
-        var typeAll = document.getElementById("indexType").children[0];
-        var typeOut = document.getElementById("indexType").children[1];
-        var typeIn = document.getElementById("indexType").children[2];
+        const typeAll = document.getElementById("indexType").children[0];
+        const typeOut = document.getElementById("indexType").children[1];
+        const typeIn = document.getElementById("indexType").children[2];
         if ("${contract.type}" === "1") {
           // 表示查询的是省外
           typeOut.selected = true;
@@ -64,51 +63,51 @@
       }
 
       function toPrePage() {
-        var currentPageObject = document.getElementById("currentPage");
-        var currentPage = parseInt(currentPageObject.value);
+        const currentPageObject = document.getElementById("currentPage");
+        const currentPage = parseInt(currentPageObject.value);
         if (currentPage === 1) {
           alert("数据已到顶！");
         } else {
           currentPageObject.value = currentPage - 1;
-          var pageSize = parseInt(document.getElementById("pageSize").value);
-          var startPageObject = document.getElementById("startPage");
+          const pageSize = parseInt(document.getElementById("pageSize").value);
+          const startPageObject = document.getElementById("startPage");
           startPageObject.value = parseInt(startPageObject.value) - pageSize;
           document.getElementById("listForm").submit();
         }
       }
 
       function toNextPage() {
-        var currentPageObject = document.getElementById("currentPage");
-        var currentPage = parseInt(currentPageObject.value);
-        var sumPage = parseInt(document.getElementById("sumPageNumber").value);
+        const currentPageObject = document.getElementById("currentPage");
+        const currentPage = parseInt(currentPageObject.value);
+        const sumPage = parseInt(document.getElementById("sumPageNumber").value);
         if (currentPage >= sumPage) {
           alert("数据已到底！");
         } else {
           currentPageObject.value = currentPage + 1;
-          var pageSize = parseInt(document.getElementById("pageSize").value);
-          var startPageObject = document.getElementById("startPage");
+          const pageSize = parseInt(document.getElementById("pageSize").value);
+          const startPageObject = document.getElementById("startPage");
           startPageObject.value = parseInt(startPageObject.value) + pageSize;
           document.getElementById("listForm").submit();
         }
       }
 
       function toLocationPage() {
-        var pageNumber = document.getElementById("pageNumber").value;
-        var currentPageObject = document.getElementById("currentPage");
-        var currentPage = currentPageObject.value;
+        let pageNumber = document.getElementById("pageNumber").value;
+        const currentPageObject = document.getElementById("currentPage");
+        const currentPage = currentPageObject.value;
         if (pageNumber == null || pageNumber === "") {
           alert("请输入要跳转的页数！")
         } else {
           pageNumber = parseInt(pageNumber);
-          var sumPage = parseInt(document.getElementById("sumPageNumber").value);
+          const sumPage = parseInt(document.getElementById("sumPageNumber").value);
           if (pageNumber < 1) {
             alert("数据已到顶!")
           } else if (pageNumber > sumPage) {
             alert("数据已到底!")
           } else {
             currentPageObject.value = pageNumber;
-            var pageSize = parseInt(document.getElementById("pageSize").value);
-            var startPageObject = document.getElementById("startPage");
+            const pageSize = parseInt(document.getElementById("pageSize").value);
+            const startPageObject = document.getElementById("startPage");
             if (pageNumber > currentPage) {
               startPageObject.value = parseInt(startPageObject.value) + pageSize;
             } else if (pageNumber < currentPage) {
@@ -131,17 +130,18 @@
       }
 
       function addContract() {
-        var url = "${pageContext.request.contextPath}/contract/toAddPage.action";
+        const url = "${pageContext.request.contextPath}/contract/toAddPage.action";
         window.open(url, "创建合同", "height=700,width=700,scrollbars=yes")
       }
 
       function editContract(id) {
-        var url = "${pageContext.request.contextPath}/contract/toEditPage.action?contractId=" + id;
+        const url = "${pageContext.request.contextPath}/contract/toEditPage.action?contractId="
+            + id;
         window.open(url, "修改合同", "height=700,width=700,scrollbars=yes")
       }
 
       function getContractDetail(id) {
-        var url = "${pageContext.request.contextPath}/contract/getContractDetail.action?contractId="
+        const url = "${pageContext.request.contextPath}/contract/getContractDetail.action?contractId="
             + id;
         window.open(url, "合同详情", "height=700,width=700,scrollbars=yes")
       }
@@ -172,7 +172,7 @@
     <input type="datetime-local" name="endTime" value="${endTime}">
     <input type="submit" value="搜索" style="background-color: #173e65;color: #ffffff;width: 70px"/><br/>
     <c:if test="${errorMsg}">
-        <font color="red">${errorMsg}</font><br/>
+        <span style="color: red; ">${errorMsg}</span><br/>
     </c:if>
     <input type="hidden" name="startPage" id="startPage" value="${startPage}"/>
     <input type="hidden" name="currentPage" id="currentPage" value="${currentPage}"/>
@@ -201,10 +201,10 @@
                 <td>${item.retailerName}</td>
                 <td>
                     <c:if test="${item.type==1}">
-                        <font color="green">省外</font>
+                        <span style="color: green; ">省外</span>
                     </c:if>
                     <c:if test="${item.type==0}">
-                        <font color="blue">省内</font>
+                        <span style="color: blue; ">省内</span>
                     </c:if>
                 </td>
                 <td>${item.createTime}</td>

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>附属品信息管理</title>
@@ -21,7 +21,6 @@
         border-style: solid;
         width: 200px;
         height: 130px;
-        margin: 4px 23px 0px 23px;
         border-radius: 5px;
         display: block;
         background: #ffffff;
@@ -39,19 +38,19 @@
       }
 
       function checkAll(obj) {
-        var isCheck = obj.checked;
-        var checkList = document.getElementsByName("arrays");
-        for (var i = 0; i < checkList.length; i++) {
+        const isCheck = obj.checked;
+        const checkList = document.getElementsByName("arrays");
+        for (let i = 0; i < checkList.length; i++) {
           checkList[i].checked = isCheck;
         }
       }
 
       function deleteAccessory() {
-        var myArray = [];
-        var len = 0;
-        var fruitId = document.getElementById("aFruitId").value;
-        var arrays = document.getElementsByName("arrays");
-        for (var i = 0; i < arrays.length; i++) {
+        const myArray = [];
+        let len = 0;
+        const fruitId = document.getElementById("aFruitId").value;
+        const arrays = document.getElementsByName("arrays");
+        for (let i = 0; i < arrays.length; i++) {
           if (arrays[i].checked) {
             myArray[len++] = arrays[i].value;
           }
@@ -62,7 +61,7 @@
           url: '${pageContext.request.contextPath}/accessory/deleteList.action',
           data: {"arrays": myArray, "fruitId": fruitId},
           traditional: true,
-          success: function (data) {
+          success: function () {
             alert("删除成功！")
             window.location.href = '${pageContext.request.contextPath}/accessory/list.action?fruitId='
                 + fruitId;
@@ -89,8 +88,8 @@
     <div class="c">
         <div style="background-color: #173e65;height: 20px;color: #ffffff;font-size: 12px;padding-left: 7px">
             添加附属品信息
-            <font style="float: right;padding-right: 10px;"
-                  onclick="showAddAccessory('false')">x</font>
+            <span style="float: right;padding-right: 10px;"
+                  onclick="showAddAccessory('false')">x</span>
         </div>
         <form id="addAccessoryForm" action="add.action" method="post"
               onsubmit="return checkAddAccessory()">

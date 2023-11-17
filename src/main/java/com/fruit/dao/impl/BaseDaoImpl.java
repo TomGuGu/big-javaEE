@@ -2,15 +2,13 @@ package com.fruit.dao.impl;
 
 import com.fruit.dao.BaseDao;
 import jakarta.annotation.Resource;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter

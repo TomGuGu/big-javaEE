@@ -137,7 +137,7 @@ public class ContractController {
 
   private String getCode() {
     String codeHead = new SimpleDateFormat("yyyyMMdd").format(new Date());
-    String barCode = "";
+    String barCode;
     String maxBarCode = contractService.getMaxBarCode();
     if (!StringUtils.isNullOrEmpty(maxBarCode)) {
       if (maxBarCode.substring(0, 8).equals(codeHead)) {
